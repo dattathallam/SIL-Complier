@@ -1,0 +1,25 @@
+%{
+	#include<stdio.h>
+	#include<stdlib.h>
+%}
+
+NUMBER [0-9]+
+OP [-|+|/|*|%]
+
+%%
+
+{NUMBER} {yylval = atoi(yytext);printf("%d ",yylval);}
+{OP} 	 {printf("%c ",*yytext);}
+
+%%
+
+int yywrap()
+{
+	printf("completed Lex part\n");
+	return 1;
+}
+int main()
+{
+	yylex();
+	return 1;
+}
