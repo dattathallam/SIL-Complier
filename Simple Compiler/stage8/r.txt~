@@ -1,0 +1,8 @@
+decl
+	integer a,b,c;
+	boolean j;
+enddecl
+begin
+	read(a);
+	write(a);
+endd
