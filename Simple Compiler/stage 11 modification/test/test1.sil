@@ -1,0 +1,24 @@
+integer main()
+{
+	decl
+		darray d,a,b,c,e;
+	enddecl
+	begin
+
+		a = alloc(35);
+		b = alloc(25);
+		c = alloc(35);
+		b = free();
+		d = alloc(35);
+		e = alloc(10);
+		write(a);
+		write(b);
+		write(c);
+		write(d);
+		write(e);
+		c = free();
+		c = alloc(81);
+		write(c);
+		return 0;
+	end
+}

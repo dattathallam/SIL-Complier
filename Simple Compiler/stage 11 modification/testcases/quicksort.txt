@@ -1,0 +1,122 @@
+decl
+	integer a,b,n,arr[10];
+	integer swap(integer index ,newindex);
+	integer readarr(integer temp);
+	integer writearr(integer temp);
+	integer partition (integer low , high);
+	boolean quicksort(integer low , high; boolean k);
+enddecl
+
+integer swap(integer index ,newindex)
+{
+	decl
+		integer s;
+	enddecl
+
+	begin
+		s = arr[index];
+		arr[index] = arr[newindex];
+		arr[newindex] = s;
+		return s;
+	end
+}
+
+
+
+integer readarr(integer temp)
+{
+	decl
+		integer count;
+	enddecl
+
+	begin
+		count=0;
+
+		while(count<temp) do
+			read(arr[count]);
+			count=count+1;
+		endwhile;
+
+		return count;
+	end
+}
+
+
+integer writearr(integer temp)
+{
+	decl
+		integer count;
+	enddecl
+
+	begin
+		count = 0;
+
+		while(count < temp) do
+			write(arr[count]);			
+			count = count+1;
+		endwhile;
+
+		return count;
+	end
+}
+
+integer partition (integer low  ,high)
+{
+	decl
+		integer pivot,t;
+		integer i ,j;
+	enddecl
+
+	begin
+
+		pivot = arr[high];
+		j = low;
+		i = low;
+		while(i < high) do
+			if (arr[i] <= pivot) then
+				t = swap (i , j);
+				j = j+1;
+			endif;
+			i=i+1;
+		endwhile;
+		i = swap (j , high);
+
+		return j;
+	end
+}
+
+
+
+boolean quicksort (integer low , high; boolean k)
+{
+	decl
+		integer pp ;
+		boolean t,temp;
+	enddecl
+
+	begin
+
+		if (low < high) then
+			pp = partition (low , high);
+			temp = quicksort(pp+1,high , t);
+			t = quicksort(low , pp-1,temp);			
+		endif;
+		return t;
+	end
+}
+
+integer main()
+{
+	decl
+		integer junk;
+		boolean temp;
+	enddecl
+
+	begin
+		read(n);
+		junk = readarr(n);
+		temp = quicksort(0,n-1,temp);
+		junk = writearr(n);
+		return junk;
+	end
+}

@@ -1,0 +1,32 @@
+decl
+	integer alloc1(integer a);
+enddecl
+integer alloc1(integer a)
+{
+	decl
+		integer iter;
+	enddecl
+
+	begin
+		iter = 0;
+		while(a > 0) do
+			iter = iter + 1;
+			a = a - 15;
+
+		endwhile;
+		return iter;
+	end
+}
+integer main()
+{
+	decl
+		integer a,k;
+	enddecl
+
+	begin
+		read(a);
+		k = alloc1(a);
+		write(k);
+		return 0;
+	end
+}

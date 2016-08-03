@@ -1,0 +1,131 @@
+type
+	typedef bst{
+		integer a;
+		bst left;
+        bst right;
+	}
+endtype
+decl
+	integer in,opt,a[10];
+	bst Root;
+	integer insert(bst &h;integer a);  	
+	integer inOrder(bst h);	
+	integer preOrder(bst h);
+	integer postOrder(bst h);		    						
+enddecl
+
+integer insert(bst &h;integer a){
+	decl
+		bst temp;
+	enddecl
+	begin
+		
+		if(h==null) then
+			temp = alloc();
+			temp.a = a; 
+		    
+			temp.left = null;
+			temp.right = null;
+			h=temp;
+		else
+			
+			if(h.a > a) then
+				if(h.left !=null) then
+					in=insert(h.left,a);
+				else
+					temp = alloc();
+					temp.a=a;
+					temp.left=null;
+					temp.right=null;
+					h.left=temp;
+					
+				endif;
+			else
+				if(h.right !=null) then
+					in=insert(h.right,a);
+				else
+					temp = alloc();
+					temp.a=a;
+					temp.left=null;
+					temp.right=null;
+					h.right=temp;
+
+				endif;
+			endif;
+		endif;
+		return 1;
+	end
+}
+
+
+integer inOrder(bst h){
+       
+	begin
+	    
+		if(h!=null) then
+		   
+			in=inOrder(h.left);
+			write(h.a);
+			in=inOrder(h.right);
+		endif;
+		return 1;
+	end
+}
+
+integer preOrder(bst h){
+       
+	begin
+	    
+		if(h!=null) then
+		   	write(h.a);
+			in=preOrder(h.left);
+			
+			in=preOrder(h.right);
+		endif;
+		return 1;
+	end
+}
+
+integer postOrder(bst h){
+       
+	begin
+	    
+		if(h!=null) then
+		   	
+			in=postOrder(h.left);
+			
+			in=postOrder(h.right);
+			write(h.a);
+		endif;
+		return 1;
+	end
+}
+
+integer main(){	
+	decl
+		integer val,flag;
+		
+	enddecl
+	begin
+	
+		Root = null;
+		flag=1;
+		while(flag==1) do
+			read(opt);
+			if(opt==1) then
+				
+				in=inOrder(Root);
+			else
+				if(opt==2) then
+				        read(val);
+						in=insert(Root,val);
+				else
+						flag=0;
+				endif;
+			endif;
+		
+		endwhile;
+		
+		return 9;
+	end
+}

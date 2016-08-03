@@ -1,0 +1,94 @@
+decl
+	integer a;
+	integer allocD(darray &D;integer size);
+	integer freeD(darray &D);
+	integer Merge(darray &A,&B,&C;integer a,b);
+enddecl
+
+integer allocD(darray &D;integer size){
+	begin
+		D=alloc(size);
+		return 2;
+	end
+}
+
+integer freeD(darray &D){
+	begin	
+		a=free(D);
+		return 1;
+	end
+}
+
+integer Merge(darray &A,&B,&C;integer a,b){
+	decl
+		integer i,k;
+		darray d;  
+	enddecl
+	begin
+		i=allocD(C,a+b);
+		k=0;
+		i=0;
+		while(i<a) do
+			C[k]=A[i];
+			i=i+1;
+			k=k+1;
+		endwhile;
+		i=freeD(A);
+		i=0;
+		while(i<b) do
+			C[k]=B[i];
+			k=k+1;
+			i=i+1;
+		endwhile;
+		i=freeD(B);
+		
+		i=allocD(d,a+b);
+		i=a+b-1;
+		k=0;
+		while(i>=0) do
+			d[k]=C[i];
+			k=k+1;
+			i=i-1;
+		endwhile;
+		
+		i=freeD(C);
+		C=d;
+		return 1;
+	end
+}
+
+integer main(){
+	decl
+		integer n,m;
+		darray A,B,C;
+	enddecl
+	begin
+		
+		a=initialize();
+		read(n);
+		read(m);
+		a=allocD(A,n);
+		a=allocD(B,m);
+		a=0;
+		while(a<n) do
+			read(A[a]);
+			a=a+1;
+		endwhile;
+		
+		a=0;
+		while(a<m) do
+			read(B[a]);
+			a=a+1;
+		endwhile;
+		
+		a=Merge(A,B,C,n,m);
+		
+		a=0;
+		while(a<(m+n)) do
+			write(C[a]);
+			a=a+1;
+		endwhile;
+		return 10;
+	end
+}
+		
