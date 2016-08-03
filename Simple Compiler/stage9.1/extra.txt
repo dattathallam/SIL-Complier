@@ -1,0 +1,59 @@
+ArgList : ArgListHead	{$$ = $1;}
+	|	{$$ = NULL;}	
+	;
+
+ArgListHead :	type ArgIDlist ArgListTail	{
+                                                Argtemp = $2; 
+                                                while(Argtemp->next != NULL){
+                                                    Argtemp = Argtemp->next;
+                                                }
+                                                Argtemp->next = $3;
+                                                $$ = $2;
+                                            }
+	;
+
+ArgListTail : DELIM ArgListHead 	{$$ = $2;}
+	| 	{$$ = NULL;}
+	;
+
+ArgIDlist : ArgIDlist COMMA ID  {Argtemp = Arginstall($3->NAME,decl_type,PTYPE_VAL); Argtemp->next = $1; $$ = Argtemp;}
+	| ArgIDlist COMMA '&' ID    {Argtemp = Arginstall($4->NAME,decl_type,PTYPE_REF); Argtemp->next = $1; $$ = Argtemp;}
+	| ID 	                    {$$ = Arginstall($1->NAME,decl_type,PTYPE_VAL);}
+	| '&' ID 	                {$$ = Arginstall($2->NAME,decl_type,PTYPE_REF);} 
+	;
+
+FdefList : FdefList Fdef {}
+		| 				 {}
+		;
+
+Fdef : type ID '(' ArgList ')' '{' LDefblock Body '}'	{
+                                                            validateFunction($2->NAME,decl_type,$4,$8);
+                                                            $2->Lentry = Lhead;
+															codegen_function($2->NAME,$8);
+															ReinitialiseLocalVariables();
+                                                        }
+	 ;
+
+Mainblock : INT MAIN '(' ')' '{' LDefblock Body '}'		{/*check all  functions are defined or not*/
+															Ginstall("MAIN",STYPE_INT,1,NULL);
+															$$ = TreeCreate(TYPE_INT,NODETYPE_MAIN,0,NULL,NULL,$7,NULL,NULL);
+															gen_code_eval($$);
+															ReinitialiseLocalVariables();
+														}
+		;
+
+LDefblock : DECL Ldeclist ENDDECL 	{}
+		  ;
+
+Ldeclist : Ldeclist Ldec   {}
+	|		{}
+	;
+
+Ldec : type Lidlist DELIM		{}
+	;
+
+
+Lidlist : Lidlist COMMA ID 	 		{Linstall($3->NAME,decl_type);}
+	| ID 							{Linstall($1->NAME,decl_type);}
+	;
+

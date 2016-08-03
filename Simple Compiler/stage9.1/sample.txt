@@ -1,0 +1,12 @@
+decl
+	integer a;
+	boolean c,d[5];
+enddecl
+begin
+	read(c);
+	d[0]=true;
+
+	d[4]=false;
+	write(d[4]);
+end
+	
