@@ -1,0 +1,16 @@
+read(a);
+if(a < 3) then
+	read(b);
+	write(b);
+	while(b < 15) do
+		write( b + 1);
+		b = b + 1;
+	endwhile;
+else
+	read(b);
+	write(b);
+	while(b < 16) do
+		write( b + 2);
+		b = b + 2;
+	endwhile;
+endif;

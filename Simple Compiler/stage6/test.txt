@@ -1,0 +1,7 @@
+decl 
+	integer a[12],g; 
+	boolean q,t[45]; 
+enddecl 
+begin 
+	write(a[0]); 
+end

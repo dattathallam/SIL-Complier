@@ -1,0 +1,5 @@
+decl integer a,b; enddecl begin read(a); if(a < 3) then read(b); write(b);while(b < 15) do write( b + 1);b = b + 1;	endwhile;else read(b); write(b);while(b < 16) do 	write( b + 2);	b = b + 2;	endwhile;endif; end
+
+decl integer a,b; boolean c,d; enddecl begin c = true; d = false; if(c) then read(a); if(d) then read(b); else write(123); endif; endif; end
+
+decl integer a,b[12]; boolean c,d[10]; enddecl begin d[4] = true; d[5] = false; read(c); a = 45; b[11] = 123; read(b[2]); write(d[5]); if(c) then read(d[6]); read(b[12]); else write(d[4]); write(d[5]); write(a); write(b[11]); endif; end
