@@ -1,0 +1,2 @@
+field assgn expr need to be written
+reading and writing a pointer need to be checked

@@ -1,0 +1,19 @@
+type
+	typedef list
+	{
+		integer a;
+		list left;
+		list right;
+	}
+endtype
+decl
+	list k;
+enddecl
+integer main()
+{
+	begin
+		k = alloc();
+		k.a = 35;
+		return 0;
+	end
+}
